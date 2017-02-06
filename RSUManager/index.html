@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>CDM | Control Panel</title>
+
+    <link href="css/glyphicon.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
+
+  </head>
+  <body> 
+    <header>
+      <div class="hdr-content">
+        <div class="hdr-brand-wrapper">
+          <h1>
+            <a class="hdr-brand-font" href="#">CDM</a>
+          </h1>
+        </div>
+        <nav class="hdr-nav">
+          <ul class="hdr-nav-list">
+            <li class="username"><a href="#">John Smith</a></li>
+            <li><a href="login.html"><span class="glyphicon glyphicon-log-out"></span></a></li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+    <section class="sidebar">
+      <form class="search-form">
+        <input type="search" id="search-input" placeholder="Search..." autocomplete="off" />
+        <span class="glyphicon glyphicon-search search-glyphicon"></span>
+        <button class="clear-btn" id="search-clear-btn">
+          <span class="glyphicon glyphicon-remove clear-glyphicon"></span>
+        </button>
+      </form>
+      <div class="sidebar-list">
+      </div>
+    </section>
+    <div class="resizer" draggable="true">
+    </div>
+    <div class="table-container">
+      <table class="rsu-table">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Attribute 1</th>
+            <th>Attribute 2</th>
+            <th>Attribute 3</th>
+            <th>Attribute 4</th>
+            <th>Attribute 5</th>
+          </tr>
+        </thead>
+        <tbody>
+        </tbody>
+      </table>
+    </div>
+  </body>
+
+  <script src="js/lib/jquery-3.1.1.min.js"></script>
+  <script src="js/script.js"></script>
+
+</html>

@@ -1,0 +1,240 @@
+body {
+    margin: 0;
+    overflow: hidden;
+    height: 100%;
+    font-size: 1.4rem;
+    line-height: 1.3;
+}
+
+h1 {
+    margin: 0;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+a:hover {
+    color: inherit;
+    text-decoration: none;
+}
+
+ul {
+    margin: 0;
+}
+
+button:focus {
+    outline: 0;
+}
+
+input[type="text"], input[type="password"], input[type="search"] {
+    border-radius: 3px;
+    -webkit-appearance: textfield;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+input[type="text"]:focus, input[type="password"]:focus, input[type="search"]:focus {
+    outline: 0;
+    border-color: #009fff;
+    box-shadow: 0 0 4px #009fff;
+}
+
+tr {
+    text-align: center;
+}
+
+/* theme color */
+.hdr-content, section.sidebar, .title-bar {
+    background: #efefef;
+    background: -webkit-linear-gradient(to bottom, #fafafa, #e6e6e6);
+    background: -o-linear-gradient(to bottom, #fafafa, #e6e6e6);
+    background: -moz-linear-gradient(to bottom, #fafafa, #e6e6e6);
+    background: linear-gradient(to bottom, #fafafa, #e6e6e6);
+}
+/*--------------*/
+
+.hdr-content {
+    padding-left: 2rem;
+    padding-right: 0;
+    position: relative;
+    color: #5e5e5e;
+    height: 4rem;
+    top: 0;
+}
+
+.hdr-brand-wrapper {
+    position: absolute;
+}
+
+a.hdr-brand-font {
+    font-family: Courier;
+    font-size: 2.8rem; }
+
+nav.hdr-nav {
+    position: relative;
+}
+
+ul.hdr-nav-list {
+    position: absolute;
+    list-style-type: none;
+    top: 0.7rem;
+    right: 2%;
+    text-align: center;
+}
+
+ul.hdr-nav-list > li {
+    display: inline-block;
+}
+
+ul.hdr-nav-list > li.username {
+    width: 20rem;
+}
+
+ul.hdr-nav-list > li.logout {
+    text-align: right
+}
+
+ul.hdr-nav-list > li > a {
+    font-size: 2rem;
+}
+
+section.sidebar {
+    top: 4rem;
+    color: #595959;
+    position: absolute;
+    z-index: 2;
+    overflow: hidden;
+    height: inherit;
+    bottom: 0;
+}
+
+.hdr-content, section.sidebar {
+    user-select: none;
+}
+
+.sidebar-list {
+    width: 26rem;
+    resize: both;
+    height: inherit;
+    overflow-y: scroll;
+    padding-bottom: 15rem;
+}
+
+.sidebar-item {
+    padding: .5rem 0 0 3rem;
+    display: block;
+    height: 3rem;
+}
+
+.sidebar-item:hover {
+    background: #c8c8c8;
+}
+
+.resizer {
+    position: absolute;
+    z-index: 3;
+    top: 4rem;
+    bottom: 4rem;
+    width: 3px;
+    cursor: col-resize;
+    left: 26rem;
+}
+
+.form-wrapper {
+    padding: 1.6rem;
+}    
+
+input.login-field {
+    width: 100%;
+    padding: 1.2rem 2rem;
+    margin: .8rem 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+}
+
+.modal {
+    position: fixed; 
+    z-index: 1; 
+    left: 0;
+    top: 0;
+    width: 100%; 
+    height: 100%; 
+    overflow: auto; 
+    background-color: rgb(0,0,0); 
+    background-color: rgba(0,0,0,0.4); 
+    padding-top: 6rem;
+}
+
+.search-glyphicon {
+    opacity: .65;
+    font-size: 1.3rem;
+}
+
+.glyphicon-search.search-glyphicon {
+    top: -2.3rem;
+    left: 1rem;
+}
+
+.glyphicon-remove.clear-glyphicon {
+    position: absolute;
+    font-size: 1rem;
+    color: #f8f8f8;
+    top: .3rem;
+    right: .3rem;
+}
+
+#search-input {
+    display: block;
+    width: 100%;
+    border: #d4d4d4 1px solid;
+    height: 3rem;
+    padding-left: 3rem;
+}
+
+#search-clear-btn {
+    position: absolute;
+    right: 1.9rem;
+    top: 1.7rem;
+    opacity: .6;
+    background: #aaa;
+    border-radius: 50%;
+    width: 1.6rem;
+    height: 1.6rem;
+    padding: 0;
+    border: 0;
+    display: none;
+}
+
+#search-clear-btn:hover {
+    opacity: 1;
+}
+
+.search-form {
+    padding: 1rem 1.2rem 1rem 1.2rem;
+    height: 5rem;
+    border-bottom: #eeeeee 1px solid;
+}
+
+.table-container {
+    padding-top: 2rem;
+    padding-left: 26rem;
+    position: absolute;
+    height: inherit;
+    width: 100%;
+}
+
+table.rsu-table {
+    width: 100%;
+    height: 100%;
+}
+
+table.rsu-table tbody {
+    width: 100%;
+    height: inherit;
+    position: absolute;
+    overflow: scroll;
+}
