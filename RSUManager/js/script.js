@@ -20,7 +20,7 @@ $(function() {
   });
   for (var ii = 0; ii < 64; ++ii)
   $(".sidebar-list").append(`
-    <a href="#" class="sidebar-item">RSU`+ii+`</a>
+    <a href="index.html?`+ii+`" class="sidebar-item">RSU`+ii+`</a>
   `);
 
   var $items = $(".sidebar-item");
@@ -41,17 +41,35 @@ $(function() {
     for (var ii = 0; ii < len; ++ii) $items[ii].style.display = "";
   });
 
+  var cur_url = location.href;
+  if (cur_url.indexOf("?") > -1) {
+    $(".table-container").hide();
+    var rsu_id = location.href.substring(location.href.indexOf("?")+1);
+    console.log(rsu_id);
+  }
+
+  $(".rsu-table thead").append(`
+    <tr>
+      <th>ID</th>
+      <th>Attribute 1</th>
+      <th>Attribute 2</th>
+      <th>Attribute 3</th>
+      <th>Attribute 4</th>
+      <th>Attribute 5</th>
+    </tr>
+  `);
+
   for (var ii = 0; ii < 64; ++ii) {
     $(".rsu-table tbody").append(`
       <tr>
-        <td>RSU`+ii+`</td>
-        <td>Value 1</td>
-        <td>Value 2</td>
-        <td>Value 3</td>
-        <td>Value 4</td>
-        <td>Value 5</td>
+        <td><a href="index.html?`+ii+`">RSU`+ii+`</a></td>
+        <td>RSU`+ii+`.Value1</td>
+        <td>RSU`+ii+`.Value2</td>
+        <td>RSU`+ii+`.Value3</td>
+        <td>RSU`+ii+`.Value4</td>
+        <td>RSU`+ii+`.Value5</td>
       </tr>`
     );
-  
   }
+
 });
