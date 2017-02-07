@@ -316,3 +316,9 @@ form.upload-form {
     overflow: scroll;
     vertical-align: top;
 }
+
+span.attr {
+    display: inline-block;
+    width: 15rem;
+}
+

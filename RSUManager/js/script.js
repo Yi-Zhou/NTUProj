@@ -52,11 +52,11 @@ $(function() {
         <h1>RSU`+rsu_id+`</h1>
         <div class="detail-attr-wrapper">
           <ul class="detail-attr-list">
-            <li><strong>Attribute 1:</strong> RSU`+rsu_id+`.Value1</li>
-            <li><strong>Attr 3:</strong> RSU`+rsu_id+`.Value2</li>
-            <li><strong>Attrib 2:</strong> RSU`+rsu_id+`.Value3</li>
-            <li><strong>Attri 4:</strong> RSU`+rsu_id+`.Value4</li>
-            <li><strong>Attribute 5:</strong> RSU`+rsu_id+`.Value5</li>
+            <li><span class="attr"><strong>Attribute 1:</strong></span> <span class="val">RSU`+rsu_id+`.Value1<span></li>
+            <li><span class="attr"><strong>Attr 3:</strong></span> <span class="val">RSU`+rsu_id+`.Value2</span></li>
+            <li><span class="attr"><strong>Attrib 2:</strong></span> <span class="val">RSU`+rsu_id+`.Value3</span></li>
+            <li><span class="attr"><strong>Attri 4:</strong></span> <span class="val">RSU`+rsu_id+`.Value4</span></li>
+            <li><span class="attr"><strong>Attribute 5:</strong></span> <span class="val">RSU`+rsu_id+`.Value5</span></li>
           </ul>
         </div>
         <div class="location-map"><img src="img/map_dummy.png" class="map" alt=""></div>
