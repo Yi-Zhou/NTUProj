@@ -35,7 +35,7 @@
       <form class="search-form">
         <input type="search" id="search-input" placeholder="Search..." autocomplete="off" />
         <span class="glyphicon glyphicon-search search-glyphicon"></span>
-        <button class="clear-btn" id="search-clear-btn">
+        <button class="clear-btn" id="search-clear-btn" onclick="return false">
           <span class="glyphicon glyphicon-remove clear-glyphicon"></span>
         </button>
       </form>
@@ -56,24 +56,13 @@
     </section>
     <section class="detail-container">
       <div class="detail-wrapper">
-        <h1>RSU01</h1>
-        <div class="detail-attr-wrapper">
-          <ul class="detail-attr-list">
-            <li><strong>Attribute 1:</strong> Value 1</li>
-            <li><strong>Attr 3:</strong> Value 2</li>
-            <li><strong>Attrib 2:</strong> Value 3</li>
-            <li><strong>Attri 4:</strong> Value 4</li>
-            <li><strong>Attribute 5:</strong> Value 5</li>
-          </ul>
-        </div>
-        <div class="location-map"><img src="img/map_dummy.png" class="map" alt=""></div>
         <div class="detail-ops-wrapper">
           <button class="upgrade">Upgrade</button>
           <button class="downgrade">Downgrade</button>
           <button class="reboot" onclick="reboot()">Reboot</button>
           <button>Sync</button>
         </div>
-        <form action="" class="upload-form" onsubmit="validateUpload">
+        <form action="" class="upload-form">
           <input type="file" class="rsu-image" accept=".pdf" multiple/>
           <button type="submit">Submit</button>
         </form>

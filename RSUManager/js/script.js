@@ -1,3 +1,4 @@
+var rsu_id;
 $(function() {
   console.log($(".resizer"));
   var resizerActive = false;
@@ -21,7 +22,7 @@ $(function() {
   });
   for (var ii = 0; ii < 64; ++ii)
   $(".sidebar-list").append(`
-    <a href="index.html?`+ii+`" class="sidebar-item">RSU`+ii+`</a>
+    <a href="index.html?id=`+ii+`" class="sidebar-item">RSU`+ii+`</a>
   `);
 
   var $items = $(".sidebar-item");
@@ -38,15 +39,28 @@ $(function() {
   });
   $("#search-clear-btn").click(function() {
     $("#search-input").val("");
-    $(this).hide();
+    console.log($items);
     for (var ii = 0; ii < len; ++ii) $items[ii].style.display = "";
   });
 
   var cur_url = location.href;
-  if (cur_url.indexOf("?") > -1) {
+  if (cur_url.indexOf("id=") > -1) {
     $(".table-container").hide();
-    var rsu_id = location.href.substring(location.href.indexOf("?")+1);
-    console.log(rsu_id);
+    $(".detail-container").show();
+    rsu_id = location.href.substring(location.href.indexOf("id=")+3);
+    $(".detail-wrapper").prepend(`
+        <h1>RSU`+rsu_id+`</h1>
+        <div class="detail-attr-wrapper">
+          <ul class="detail-attr-list">
+            <li><strong>Attribute 1:</strong> RSU`+rsu_id+`.Value1</li>
+            <li><strong>Attr 3:</strong> RSU`+rsu_id+`.Value2</li>
+            <li><strong>Attrib 2:</strong> RSU`+rsu_id+`.Value3</li>
+            <li><strong>Attri 4:</strong> RSU`+rsu_id+`.Value4</li>
+            <li><strong>Attribute 5:</strong> RSU`+rsu_id+`.Value5</li>
+          </ul>
+        </div>
+        <div class="location-map"><img src="img/map_dummy.png" class="map" alt=""></div>
+    `);
   }
   else {
     $(".detail-container").hide();
@@ -67,7 +81,7 @@ $(function() {
   for (var ii = 0; ii < 64; ++ii) {
     $(".rsu-table tbody").append(`
       <tr>
-        <td><a href="index.html?`+ii+`">RSU`+ii+`</a></td>
+        <td><a href="index.html?id=`+ii+`">RSU`+ii+`</a></td>
         <td>RSU`+ii+`.Value1</td>
         <td>RSU`+ii+`.Value2</td>
         <td>RSU`+ii+`.Value3</td>
@@ -77,16 +91,20 @@ $(function() {
     );
   }
 
+  $uploadForm = $("form.upload-form");
+
   $("button.upgrade, button.downgrade").click(function() {
-    $("form.upload-form").slideToggle(200);
+    $uploadForm.slideToggle(200);
   });
+
+  $uploadForm.on("submit", function(e) {
+    e.preventDefault();
+    console.log("here");
+    $uploadForm.slideToggle(200);
+  })
 });
 
 function reboot() {
-  confirm("Are you sure to reboot the RSU?");
+  confirm("Are you sure to reboot RSU"+rsu_id+"?");
 }
 
-var _validateFormExtensions = ["pdf"];
-function validateUpload(form) {
-
-}

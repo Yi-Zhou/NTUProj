@@ -272,6 +272,7 @@ table.rsu-table tr:nth-child(even) {
 }
 
 section.detail-container {
+    display: none;
     padding-left: 26rem;
 }
 
