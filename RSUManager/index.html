@@ -20,7 +20,7 @@
       <div class="hdr-content">
         <div class="hdr-brand-wrapper">
           <h1>
-            <a class="hdr-brand-font" href="#">CDM</a>
+            <a class="hdr-brand-font" href="index.html">CDM</a>
           </h1>
         </div>
         <nav class="hdr-nav">
@@ -44,7 +44,7 @@
     </section>
     <div class="resizer" draggable="true">
     </div>
-    <div class="table-container">
+    <section class="table-container">
       <div class="table-wrapper">
         <table class="rsu-table">
           <thead>
@@ -53,10 +53,32 @@
           </tbody>
         </table>
       </div>
+    </section>
+    <section class="detail-container">
       <div class="detail-wrapper">
+        <h1>RSU01</h1>
+        <div class="detail-attr-wrapper">
+          <ul class="detail-attr-list">
+            <li><strong>Attribute 1:</strong> Value 1</li>
+            <li><strong>Attr 3:</strong> Value 2</li>
+            <li><strong>Attrib 2:</strong> Value 3</li>
+            <li><strong>Attri 4:</strong> Value 4</li>
+            <li><strong>Attribute 5:</strong> Value 5</li>
+          </ul>
+        </div>
+        <div class="location-map"><img src="img/map_dummy.png" class="map" alt=""></div>
+        <div class="detail-ops-wrapper">
+          <button class="upgrade">Upgrade</button>
+          <button class="downgrade">Downgrade</button>
+          <button class="reboot" onclick="reboot()">Reboot</button>
+          <button>Sync</button>
+        </div>
+        <form action="" class="upload-form" onsubmit="validateUpload">
+          <input type="file" class="rsu-image" accept=".pdf" multiple/>
+          <button type="submit">Submit</button>
+        </form>
       </div>
-    </div>
-    
+    </section>
   </div>
   <noscript>
     This page requires JavaScript to run.

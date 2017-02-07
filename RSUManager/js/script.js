@@ -16,6 +16,7 @@ $(function() {
       $(".sidebar-list").css("width", e.pageX);
       $(".table-container").css("padding-left", e.pageX);
       $("section.sidebar").css("width", e.pageX);
+      $("section.detail-container").css("padding-left", e.pageX);
     }
   });
   for (var ii = 0; ii < 64; ++ii)
@@ -47,6 +48,10 @@ $(function() {
     var rsu_id = location.href.substring(location.href.indexOf("?")+1);
     console.log(rsu_id);
   }
+  else {
+    $(".detail-container").hide();
+    console.log("hide");
+  }
 
   $(".rsu-table thead").append(`
     <tr>
@@ -72,4 +77,16 @@ $(function() {
     );
   }
 
+  $("button.upgrade, button.downgrade").click(function() {
+    $("form.upload-form").slideToggle(200);
+  });
 });
+
+function reboot() {
+  confirm("Are you sure to reboot the RSU?");
+}
+
+var _validateFormExtensions = ["pdf"];
+function validateUpload(form) {
+
+}

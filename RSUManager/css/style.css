@@ -27,6 +27,24 @@ a:hover {
 
 ul {
     margin: 0;
+
+    -webkit-margin-before: 0;
+    -moz-margin-before: 0;
+    -ms-margin-before: 0;
+    -o-margin-before: 0;
+    margin-before: 0;
+
+    -webkit-margin-after: 0;
+    -moz-margin-after: 0;
+    -ms-margin-after: 0;
+    -o-margin-after: 0;
+    margin-after: 0;
+
+    -webkit-padding-start: 0;
+    -moz-padding-start: 0;
+    -ms-padding-start: 0;
+    -o-padding-start: 0;
+    padding-start: 0;
 }
 
 button:focus {
@@ -251,4 +269,49 @@ table.rsu-table tbody tr td, table.rsu-table thead tr th {
 
 table.rsu-table tr:nth-child(even) {
     background-color: #e8e8e8;
+}
+
+section.detail-container {
+    padding-left: 26rem;
+}
+
+div.detail-wrapper {
+    padding: 8rem 0 0 8rem;
+}
+
+img.map {
+    width: 20rem;
+    height: 20rem;
+}
+
+form.upload-form {
+    margin-top: 1rem;
+    display: none;
+}
+
+.detail-attr-wrapper {
+    display: inline-block;
+    vertical-align: top;
+    padding-top: 1.5rem;
+    width: 49%;
+}
+
+.detail-attr-list {
+    list-style: none;
+}
+
+.detail-attr-list li {
+    list-style: none;
+    padding-top: 1.5rem;
+}
+
+.detail-ops-wrapper {
+    margin-top: 5rem;
+    height: 50%;
+}
+
+.location-map {
+    display: inline-block;
+    overflow: scroll;
+    vertical-align: top;
 }
