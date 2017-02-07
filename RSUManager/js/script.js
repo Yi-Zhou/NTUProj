@@ -15,9 +15,8 @@ $(function() {
     {
       $(".resizer").css("left", e.pageX);
       $(".sidebar-list").css("width", e.pageX);
-      $(".table-container").css("padding-left", e.pageX);
       $("section.sidebar").css("width", e.pageX);
-      $("section.detail-container").css("padding-left", e.pageX);
+      $(".main-container, .table-container").css("padding-left", e.pageX);
     }
   });
   for (var ii = 0; ii < 64; ++ii)
@@ -46,7 +45,7 @@ $(function() {
   var cur_url = location.href;
   if (cur_url.indexOf("id=") > -1) {
     $(".table-container").hide();
-    $(".detail-container").show();
+    $(".main-container").show();
     rsu_id = location.href.substring(location.href.indexOf("id=")+3);
     $(".detail-wrapper").prepend(`
         <h1>RSU`+rsu_id+`</h1>
@@ -63,7 +62,7 @@ $(function() {
     `);
   }
   else {
-    $(".detail-container").hide();
+    $(".main-container").hide();
     console.log("hide");
   }
 

@@ -54,20 +54,24 @@
         </table>
       </div>
     </section>
-    <section class="detail-container">
-      <div class="detail-wrapper">
-        <div class="detail-ops-wrapper">
+    <div class="main-container">
+      <section class="detail-container">
+        <div class="detail-wrapper">
+        </div>
+      </section>
+      <section class="ops-container">
+        <div class="ops-wrapper">
           <button class="upgrade">Upgrade</button>
           <button class="downgrade">Downgrade</button>
           <button class="reboot" onclick="reboot()">Reboot</button>
           <button>Sync</button>
+          <form action="" class="upload-form">
+            <input type="file" class="rsu-image" accept=".pdf" multiple/>
+            <button type="submit">Submit</button>
+          </form>
         </div>
-        <form action="" class="upload-form">
-          <input type="file" class="rsu-image" accept=".pdf" multiple/>
-          <button type="submit">Submit</button>
-        </form>
-      </div>
-    </section>
+      </section>
+    </div>
   </div>
   <noscript>
     This page requires JavaScript to run.

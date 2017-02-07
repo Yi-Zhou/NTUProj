@@ -242,7 +242,7 @@ input.login-field {
     border-bottom: #eeeeee 1px solid;
 }
 
-.table-container {
+section.table-container {
     padding-left: 26rem;
     position: absolute;
     height: inherit;
@@ -271,12 +271,20 @@ table.rsu-table tr:nth-child(even) {
     background-color: #e8e8e8;
 }
 
-section.detail-container {
-    display: none;
+.main-container {
+    position: absolute;
     padding-left: 26rem;
+    display: none;
+    width: 100%;
+    height: inherit;
+    background-color: #fcfcfc;
 }
 
-div.detail-wrapper {
+.ops-wrapper {
+    padding: 1rem 0 0 7rem;
+}
+
+.detail-wrapper {
     padding: 8rem 0 0 8rem;
 }
 
@@ -290,20 +298,20 @@ form.upload-form {
     display: none;
 }
 
+ul.detail-attr-list {
+    list-style: none;
+}
+
+ul.detail-attr-list li {
+    list-style: none;
+    padding-top: 1.5rem;
+}
+
 .detail-attr-wrapper {
     display: inline-block;
     vertical-align: top;
     padding-top: 1.5rem;
     width: 49%;
-}
-
-.detail-attr-list {
-    list-style: none;
-}
-
-.detail-attr-list li {
-    list-style: none;
-    padding-top: 1.5rem;
 }
 
 .detail-ops-wrapper {
