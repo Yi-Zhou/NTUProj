@@ -139,7 +139,7 @@ section.sidebar {
 }
 
 .sidebar-list {
-    width: 26rem;
+    width: 24rem;
     resize: both;
     height: inherit;
     overflow-y: scroll;
@@ -172,7 +172,7 @@ section.sidebar {
     bottom: 4rem;
     width: 3px;
     cursor: col-resize;
-    left: 26rem;
+    left: 24rem;
 }
 
 .form-wrapper {
@@ -252,7 +252,7 @@ input.login-field {
 }
 
 section.table-container {
-    padding-left: 26rem;
+    padding-left: 24rem;
     position: absolute;
     height: inherit;
     width: 100%;
@@ -282,7 +282,7 @@ table.rsu-table tr:nth-child(even) {
 
 .main-container {
     position: absolute;
-    padding-left: 26rem;
+    padding-left: 24rem;
     display: none;
     width: 100%;
     height: inherit;

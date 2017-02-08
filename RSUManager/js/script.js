@@ -1,4 +1,4 @@
-var rsu_id;
+var dev_id;
 
 function randomStatus() {
   return Math.floor(Math.random()*2) === 0? "<span class='font-alert'>Not Available</span>": 
@@ -27,12 +27,12 @@ $(function() {
   });
   for (var ii = 0; ii < 64; ++ii)
     $("#rsu-list").append(`
-    <a href="#" class="sidebar-item">RSU`+ii+`</a>
+    <a href="#rsu`+ii+`" class="sidebar-item detail-link">RSU`+ii+`</a>
     `);
 
   for (var ii=0; ii < 33; ++ii)
     $("#obu-list").append(`
-      <a href="#" class="sidebar-item">OBU`+ii+`</a>
+      <a href="#obu`+ii+`" class="sidebar-item detail-link">OBU`+ii+`</a>
     `);
 
   var $items = $(".sidebar-item.expandable");
@@ -66,34 +66,18 @@ $(function() {
       var ele = $subitems[ii];
       console.log(ele.text);
       if (ele.text.toUpperCase().indexOf(this.value.toUpperCase()) < 0) ele.style.display = "none";
-      else ele.style.display = "block";
+      else ele.style.display = "";
     }
   });
   $("#search-clear-btn").click(function() {
     // clear search field
     $("#search-input").val("");
-    console.log($subitems);
-    for (var ii = 0; ii < len; ++ii) $subitems[ii].style.display = "";
-  });
-
-  $(".sidebar-sublist .sidebar-item").click(function (e) {
-    $(".table-container").hide();
-    $(".main-container").show();
-    var $ele = $(e.target);
-    rsu_id = $ele.text();
-    $(".detail-wrapper").empty().prepend(`
-        <h1>`+rsu_id+`</h1>
-        <div class="detail-attr-wrapper">
-          <ul class="detail-attr-list">
-            <li><span class="attr"><strong>Attribute 1:</strong></span> <span class="val">`+rsu_id+`.Value1<span></li>
-            <li><span class="attr"><strong>Attr 3:</strong></span> <span class="val">`+rsu_id+`.Value2</span></li>
-            <li><span class="attr"><strong>Attrib 2:</strong></span> <span class="val">`+rsu_id+`.Value3</span></li>
-            <li><span class="attr"><strong>Attri 4:</strong></span> <span class="val">`+rsu_id+`.Value4</span></li>
-            <li><span class="attr"><strong>Attribute 5:</strong></span> <span class="val">`+rsu_id+`.Value5</span></li>
-          </ul>
-        </div>
-        <div class="location-map"><img src="img/map_dummy.png" class="map" alt=""></div>
-    `);
+    $(".sidebar-item.expandable").show();
+    $(".sidebar-sublist").hide();
+    $("#search-clear-btn").hide();
+    $(".list-arrow").removeClass("glyphicon-triangle-bottom");
+    for (var ii = 0; ii < len; ++ii)
+      $subitems[ii].style.display = "";
   });
 
   $(".rsu-table thead").append(`
@@ -110,7 +94,7 @@ $(function() {
   for (var ii = 0; ii < 64; ++ii) {
     $(".rsu-table tbody").append(`
       <tr>
-        <td><a href="#">RSU`+ii+`</a></td>
+        <td><a href="#" class="detail-link">RSU`+ii+`</a></td>
         <td>RSU`+ii+`.Value1</td>
         <td>RSU`+ii+`.Value2</td>
         <td>RSU`+ii+`.Value3</td>
@@ -123,7 +107,7 @@ $(function() {
   for (var ii = 0; ii < 33; ++ii) {
     $(".rsu-table tbody").append(`
       <tr>
-        <td><a href="#">OBU`+ii+`</a></td>
+        <td><a href="#" class="detail-link">OBU`+ii+`</a></td>
         <td>OBU`+ii+`.Value1</td>
         <td>OBU`+ii+`.Value2</td>
         <td>OBU`+ii+`.Value3</td>
@@ -132,6 +116,27 @@ $(function() {
       </tr>`
     );
   }
+
+  $(".detail-link").click(function (e) {
+    $(".table-container").hide();
+    $(".main-container").show();
+    var $ele = $(e.target);
+    dev_id = $ele.text();
+    $(".detail-wrapper").empty().prepend(`
+        <h1>`+dev_id+`</h1>
+        <div class="detail-attr-wrapper">
+          <ul class="detail-attr-list">
+            <li><span class="attr"><strong>Attribute 1:</strong></span> <span class="val">`+dev_id+`.Value1<span></li>
+            <li><span class="attr"><strong>Attr 3:</strong></span> <span class="val">`+dev_id+`.Value2</span></li>
+            <li><span class="attr"><strong>Attrib 2:</strong></span> <span class="val">`+dev_id+`.Value3</span></li>
+            <li><span class="attr"><strong>Attri 4:</strong></span> <span class="val">`+dev_id+`.Value4</span></li>
+            <li><span class="attr"><strong>Attribute 5:</strong></span> <span class="val">`+dev_id+`.Value5</span></li>
+          </ul>
+        </div>
+        <div class="location-map"><img src="img/map_dummy.png" class="map" alt=""></div>
+    `);
+  });
+
 
   $uploadForm = $("form.upload-form");
 
@@ -147,9 +152,9 @@ $(function() {
 });
 
 function reboot() {
-  confirm("Are you sure you want to reboot RSU"+rsu_id+"?");
+  confirm("Are you sure you want to reboot "+dev_id+"?");
 }
 
 function sync() {
-  confirm("Are you sure you want to synchronize configuration files on this device?");
+  confirm("Are you sure you want to synchronize configuration files on "+dev_id+"?");
 }
