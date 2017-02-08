@@ -339,3 +339,12 @@ span.attr {
     width: 15rem;
 }
 
+.font-alert {
+    color: #FF4444;
+    font-weight: bold;
+}
+
+.font-pass {
+    color: #6dc066;
+    font-weight: bold;
+}

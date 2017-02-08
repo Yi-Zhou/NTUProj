@@ -1,4 +1,10 @@
 var rsu_id;
+
+function randomStatus() {
+  return Math.floor(Math.random()*2) === 0? "<span class='font-alert'>Not Available</span>": 
+  "<span class='font-pass'>Available</span>";
+}
+
 $(function() {
   console.log($(".resizer"));
   var resizerActive = false;
@@ -97,7 +103,7 @@ $(function() {
       <th>Attribute 2</th>
       <th>Attribute 3</th>
       <th>Attribute 4</th>
-      <th>Attribute 5</th>
+      <th>Availability</th>
     </tr>
   `);
 
@@ -109,7 +115,20 @@ $(function() {
         <td>RSU`+ii+`.Value2</td>
         <td>RSU`+ii+`.Value3</td>
         <td>RSU`+ii+`.Value4</td>
-        <td>RSU`+ii+`.Value5</td>
+        <td>`+randomStatus()+`</td>
+
+      </tr>`
+    );
+  }
+  for (var ii = 0; ii < 33; ++ii) {
+    $(".rsu-table tbody").append(`
+      <tr>
+        <td><a href="#">OBU`+ii+`</a></td>
+        <td>OBU`+ii+`.Value1</td>
+        <td>OBU`+ii+`.Value2</td>
+        <td>OBU`+ii+`.Value3</td>
+        <td>OBU`+ii+`.Value4</td>
+        <td>`+randomStatus()+`</td>
       </tr>`
     );
   }
