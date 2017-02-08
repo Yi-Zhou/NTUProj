@@ -20,51 +20,75 @@ $(function() {
     }
   });
   for (var ii = 0; ii < 64; ++ii)
-  $(".sidebar-list").append(`
-    <a href="index.html?id=`+ii+`" class="sidebar-item">RSU`+ii+`</a>
-  `);
+    $("#rsu-list").append(`
+    <a href="#" class="sidebar-item">RSU`+ii+`</a>
+    `);
 
-  var $items = $(".sidebar-item");
-  var len = $items.length;
+  for (var ii=0; ii < 33; ++ii)
+    $("#obu-list").append(`
+      <a href="#" class="sidebar-item">OBU`+ii+`</a>
+    `);
+
+  var $items = $(".sidebar-item.expandable");
+  $items.click(function(e) {
+    var $ele = $(e.target);
+    $ele.next().toggle();
+    $ele.children(".list-arrow").toggleClass("glyphicon-triangle-bottom");
+  });
+  var $subitems = $(".sidebar-sublist .sidebar-item");
+  var len = $subitems.length;
+  console.log(len);
   $("#search-input").on("input", function(e) {
-    if (this.value) $("#search-clear-btn").show();
-    else $("#search-clear-btn").hide();
+    // search logic
+    console.log($subitems);
+    if (this.value) 
+    {
+      $(".sidebar-item.expandable").hide();
+      $("#search-clear-btn").show();
+      $(".sidebar-sublist").show();
+    }
+    else 
+    {
+      $(".sidebar-item.expandable").show();
+      $(".sidebar-sublist").hide();
+      $("#search-clear-btn").hide();
+      $(".list-arrow").removeClass("glyphicon-triangle-bottom");
+    }
+
     for (var ii = 0; ii < len; ++ii)
     {
-      var ele = $items[ii];
+      var ele = $subitems[ii];
+      console.log(ele.text);
       if (ele.text.toUpperCase().indexOf(this.value.toUpperCase()) < 0) ele.style.display = "none";
-      else ele.style.display = "";
+      else ele.style.display = "block";
     }
   });
   $("#search-clear-btn").click(function() {
+    // clear search field
     $("#search-input").val("");
-    console.log($items);
-    for (var ii = 0; ii < len; ++ii) $items[ii].style.display = "";
+    console.log($subitems);
+    for (var ii = 0; ii < len; ++ii) $subitems[ii].style.display = "";
   });
 
-  var cur_url = location.href;
-  if (cur_url.indexOf("id=") > -1) {
+  $(".sidebar-sublist .sidebar-item").click(function (e) {
     $(".table-container").hide();
     $(".main-container").show();
-    rsu_id = location.href.substring(location.href.indexOf("id=")+3);
-    $(".detail-wrapper").prepend(`
-        <h1>RSU`+rsu_id+`</h1>
+    var $ele = $(e.target);
+    rsu_id = $ele.text();
+    $(".detail-wrapper").empty().prepend(`
+        <h1>`+rsu_id+`</h1>
         <div class="detail-attr-wrapper">
           <ul class="detail-attr-list">
-            <li><span class="attr"><strong>Attribute 1:</strong></span> <span class="val">RSU`+rsu_id+`.Value1<span></li>
-            <li><span class="attr"><strong>Attr 3:</strong></span> <span class="val">RSU`+rsu_id+`.Value2</span></li>
-            <li><span class="attr"><strong>Attrib 2:</strong></span> <span class="val">RSU`+rsu_id+`.Value3</span></li>
-            <li><span class="attr"><strong>Attri 4:</strong></span> <span class="val">RSU`+rsu_id+`.Value4</span></li>
-            <li><span class="attr"><strong>Attribute 5:</strong></span> <span class="val">RSU`+rsu_id+`.Value5</span></li>
+            <li><span class="attr"><strong>Attribute 1:</strong></span> <span class="val">`+rsu_id+`.Value1<span></li>
+            <li><span class="attr"><strong>Attr 3:</strong></span> <span class="val">`+rsu_id+`.Value2</span></li>
+            <li><span class="attr"><strong>Attrib 2:</strong></span> <span class="val">`+rsu_id+`.Value3</span></li>
+            <li><span class="attr"><strong>Attri 4:</strong></span> <span class="val">`+rsu_id+`.Value4</span></li>
+            <li><span class="attr"><strong>Attribute 5:</strong></span> <span class="val">`+rsu_id+`.Value5</span></li>
           </ul>
         </div>
         <div class="location-map"><img src="img/map_dummy.png" class="map" alt=""></div>
     `);
-  }
-  else {
-    $(".main-container").hide();
-    console.log("hide");
-  }
+  });
 
   $(".rsu-table thead").append(`
     <tr>
@@ -80,7 +104,7 @@ $(function() {
   for (var ii = 0; ii < 64; ++ii) {
     $(".rsu-table tbody").append(`
       <tr>
-        <td><a href="index.html?id=`+ii+`">RSU`+ii+`</a></td>
+        <td><a href="#">RSU`+ii+`</a></td>
         <td>RSU`+ii+`.Value1</td>
         <td>RSU`+ii+`.Value2</td>
         <td>RSU`+ii+`.Value3</td>
@@ -104,6 +128,9 @@ $(function() {
 });
 
 function reboot() {
-  confirm("Are you sure to reboot RSU"+rsu_id+"?");
+  confirm("Are you sure you want to reboot RSU"+rsu_id+"?");
 }
 
+function sync() {
+  confirm("Are you sure you want to synchronize configuration files on this device?");
+}

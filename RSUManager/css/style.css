@@ -147,13 +147,22 @@ section.sidebar {
 }
 
 .sidebar-item {
-    padding: .5rem 0 0 3rem;
+    padding: .5rem 0 0 2rem;
     display: block;
     height: 3rem;
 }
 
 .sidebar-item:hover {
     background: #c8c8c8;
+}
+
+.expandable {
+    cursor: pointer;
+}
+
+.sidebar-sublist{
+    display: none;
+    padding-left: 2rem;
 }
 
 .resizer {
