@@ -15,8 +15,8 @@
 
   </head>
   <body> 
-  <div class="main_site">
-    <header>
+  <div class="main-site">
+    <header id="main-header">
       <div class="hdr-content">
         <div class="hdr-brand-wrapper">
           <h1>
@@ -31,37 +31,11 @@
         </nav>
       </div>
     </header>
-    <section class="sidebar">
-      <form class="search-form">
-        <input type="search" id="search-input" placeholder="Search..." autocomplete="off" />
-        <span class="glyphicon glyphicon-search search-glyphicon"></span>
-        <button class="clear-btn" id="search-clear-btn" onclick="return false">
-          <span class="glyphicon glyphicon-remove clear-glyphicon"></span>
-        </button>
-      </form>
-      <div class="sidebar-list">
-        <div class="sidebar-item expandable" id="rsu-list-expander">
-          <span class="glyphicon glyphicon-triangle-right list-arrow"></span> RSU
-        </div>
-        <div id="rsu-list" class="sidebar-sublist"></div>
-        <div class="sidebar-item expandable" id="obu-list-expander">
-          <span class="glyphicon glyphicon-triangle-right list-arrow"></span> OBU
-        </div>
-        <div id="obu-list" class="sidebar-sublist"></div>
-      </div>
+    <section id="main-sidebar" class="sidebar">
     </section>
     <div class="resizer" draggable="true">
     </div>
     <nav class="nav-tabs">
-      <div class="tabs-wrapper">
-        <ul class="tabs">
-          <li id="tab-overview" class="tab-item active"><a href="#">Overview</a></li>
-          <li id="tab-dashbrd"  class="tab-item"><a href="#">Dashboard</a></li>
-          <li id="tab-devstat" class="tab-item"><a href="#">Device Status</a></li>
-          <li id="tab-ops" class="tab-item"><a href="#">Operations</a></li>
-          <li id="tab-events" class="tab-item"><a href="#">Events</a></li>
-        </ul>
-      </div>
     </nav>
     <section class="table-container">
       <div class="table-wrapper">
@@ -95,7 +69,7 @@
   <noscript>
     This page requires JavaScript to run.
     <style>
-      .main_site {
+      .main-site {
         display: none;
       }
     </style>
