@@ -6,7 +6,6 @@ function randomStatus() {
 }
 
 $(function() {
-  console.log($(".resizer"));
   var resizerActive = false;
   $(".resizer").mousedown(function(e) {
     resizerActive = true;
@@ -17,12 +16,13 @@ $(function() {
     console.log("up");
   });
   $(".resizer").on("drag", function(e) {
-    if (e.pageX > 150 && e.pageX < 600)
+    if (e.pageX > 180 && e.pageX < 600)
     {
       $(".resizer").css("left", e.pageX);
       $(".sidebar-list").css("width", e.pageX);
       $("section.sidebar").css("width", e.pageX);
       $(".main-container, .table-container").css("padding-left", e.pageX);
+      $(".nav-tabs").css("left", e.pageX);
     }
   });
   for (var ii = 0; ii < 64; ++ii)
@@ -39,14 +39,13 @@ $(function() {
   $items.click(function(e) {
     var $ele = $(e.target);
     $ele.next().toggle();
+    $ele.toggleClass("expanded");
     $ele.children(".list-arrow").toggleClass("glyphicon-triangle-bottom");
   });
   var $subitems = $(".sidebar-sublist .sidebar-item");
   var len = $subitems.length;
-  console.log(len);
   $("#search-input").on("input", function(e) {
     // search logic
-    console.log($subitems);
     if (this.value) 
     {
       $(".sidebar-item.expandable").hide();
@@ -58,13 +57,11 @@ $(function() {
       $(".sidebar-item.expandable").show();
       $(".sidebar-sublist").hide();
       $("#search-clear-btn").hide();
-      $(".list-arrow").removeClass("glyphicon-triangle-bottom");
     }
 
     for (var ii = 0; ii < len; ++ii)
     {
       var ele = $subitems[ii];
-      console.log(ele.text);
       if (ele.text.toUpperCase().indexOf(this.value.toUpperCase()) < 0) ele.style.display = "none";
       else ele.style.display = "";
     }
@@ -75,19 +72,18 @@ $(function() {
     $(".sidebar-item.expandable").show();
     $(".sidebar-sublist").hide();
     $("#search-clear-btn").hide();
-    $(".list-arrow").removeClass("glyphicon-triangle-bottom");
     for (var ii = 0; ii < len; ++ii)
       $subitems[ii].style.display = "";
+    $(".bookmark-item.active").click();
   });
 
   $(".rsu-table thead").append(`
     <tr>
-      <th>ID</th>
-      <th>Attribute 1</th>
-      <th>Attribute 2</th>
-      <th>Attribute 3</th>
-      <th>Attribute 4</th>
-      <th>Availability</th>
+      <th><a href="#">ID</a></th>
+      <th><a href="#">Attribute 1</a></th>
+      <th><a href="#">Attribute 2</a></th>
+      <th><a href="#">Attribute 3</a></th>
+      <th><a href="#">Availability</a></th>
     </tr>
   `);
 
@@ -98,7 +94,6 @@ $(function() {
         <td>RSU`+ii+`.Value1</td>
         <td>RSU`+ii+`.Value2</td>
         <td>RSU`+ii+`.Value3</td>
-        <td>RSU`+ii+`.Value4</td>
         <td>`+randomStatus()+`</td>
 
       </tr>`
@@ -111,7 +106,6 @@ $(function() {
         <td>OBU`+ii+`.Value1</td>
         <td>OBU`+ii+`.Value2</td>
         <td>OBU`+ii+`.Value3</td>
-        <td>OBU`+ii+`.Value4</td>
         <td>`+randomStatus()+`</td>
       </tr>`
     );
@@ -148,7 +142,47 @@ $(function() {
     e.preventDefault();
     console.log("here");
     $uploadForm.slideToggle(200);
-  })
+  });
+
+  function nav_click(_this, nav_name) {
+    $("."+nav_name+"-item.active").removeClass("active");
+    console.log(_this);
+    $(_this).addClass("active");
+  }
+
+  $(".bookmark-item").click(function() {nav_click(this, "bookmark")});
+
+  $("#bookmark-overview").click(function() {
+    $("#rsu-list-expander").show();
+    $("#obu-list-expander").show();
+    if ($("#rsu-list-expander").hasClass("expanded")) {
+      $("#rsu-list").show();
+    }
+    if ($("#obu-list-expander").hasClass("expanded")) {
+      $("#obu-list").show();
+    }
+  });
+
+  $("#bookmark-rsu").click(function() {
+    $("#obu-list").hide();
+    $("#obu-list-expander").hide();
+    $("#rsu-list-expander").show();
+    if ($("#rsu-list-expander").hasClass("expanded")) {
+      $("#rsu-list").show();
+    }
+  });
+
+  $("#bookmark-obu").click(function() {
+    $("#rsu-list").hide();
+    $("#rsu-list-expander").hide();
+    $("#obu-list-expander").show();
+    if ($("#obu-list-expander").hasClass("expanded")) {
+      $("#obu-list").show();
+    }
+  }); 
+
+  $(".tab-item").click(function() {nav_click(this, "tab")});
+
 });
 
 function reboot() {

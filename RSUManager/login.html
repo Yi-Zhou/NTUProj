@@ -1,7 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-<!DOCTYPE html>
-<html>
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     
@@ -18,17 +16,31 @@
   </head>
     <style>
 
-    button {
-        padding: 14px 20px;
-        margin: 8px 0;
-        cursor: pointer;
-        width: 100%;
+    button.login-btn {
+      padding: 1.4rem 2rem;
+      margin: .8rem 0;
+      cursor: pointer;
+      width: 100%;
+      background: #efefef;
+      background: -webkit-linear-gradient(to bottom, #fafafa, #e6e6e6);
+      background: -o-linear-gradient(to bottom, #fafafa, #e6e6e6);
+      background: -moz-linear-gradient(to bottom, #fafafa, #e6e6e6);
+      background: linear-gradient(to bottom, #fafafa, #e6e6e6);
+      border: 1px solid #bbb;
     }
 
-    .modal-content {
-        margin: 0 auto;
+    button.login-btn:active {
+      background: #efefef;
+      background: -webkit-linear-gradient(to top, #fafafa, #e6e6e6);
+      background: -o-linear-gradient(to top, #fafafa, #e6e6e6);
+      background: -moz-linear-gradient(to top, #fafafa, #e6e6e6);
+      background: linear-gradient(to top, #fafafa, #e6e6e6);
+    }
+
+    .login-form {
+        margin: 10rem auto;
         background-color: #fefefe;
-        border: 1px solid #888;
+        border: 1px solid #bbb;
         width: 30%; 
     }
 
@@ -36,31 +48,50 @@
         body {
             overflow: hidden;
         }
-        .modal-content {
+        .login-form {
             width: 225px;
         }
+    }
+    
+    input.login-field {
+        width: 100%;
+        padding: 1.2rem 2rem;
+        margin: .8rem 0;
+        display: inline-block;
+        border: 1px solid #ccc;
+        box-sizing: border-box;
     }
 
     </style>
   <body>
 
-    <div id="id01" class="modal">
-      
-      <form class="modal-content animate" action="index.html">
-
-        <div class="form-wrapper">
-          <label><b>USERNAME</b></label>
-          <input type="text" placeholder="Enter username" class="login-field" Username" name="uname" autocomplete="off" required>
-
-          <label><b>PASSWORD</b></label>
-          <input type="password" placeholder="Enter password" class="login-field" Password" name="pwd" required>
-            
-          <button class="login-button" type="submit">LOGIN</button>
+    <header>
+      <div class="hdr-content">
+        <div class="hdr-brand-wrapper">
+          <h1>
+            <a class="hdr-brand-font" href="index.html">SMTB</a>
+          </h1>
         </div>
+        <div class="hdr-title-wrapper">
+          <h2>
+            Device Management Web Console
+          </h2>
+        </div>
+      </div>
+    </header>
 
-      </form>
-    </div>
+    <form class="login-form" action="index.html">
+
+      <div class="form-wrapper">
+        <label><b>USERNAME</b></label>
+        <input type="text" placeholder="Enter username" class="login-field" Username" name="uname" autocomplete="off" required>
+
+        <label><b>PASSWORD</b></label>
+        <input type="password" placeholder="Enter password" class="login-field" Password" name="pwd" required>
+          
+        <button class="login-btn" type="submit">LOGIN</button>
+      </div>
+
+    </form>
   </body>
-</html>
-
 </html>
