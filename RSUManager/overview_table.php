@@ -12,6 +12,11 @@
     </thead>
     <tbody>
     <?php
+    function randomStatus() {
+      if (rand(0, 1) === 0) return "<span class='font-alert'>Not Available</span>";
+      else return "<span class='font-pass'>Available</span>";
+    }
+
     for ($ii = 0; $ii < 64; ++$ii) {
       echo "
         <tr>
@@ -19,7 +24,7 @@
           <td>RSU$ii.Value1</td>
           <td>RSU$ii.Value2</td>
           <td>RSU$ii.Value3</td>
-          <td>randomStatus()</td>
+          <td>".randomStatus()."</td>
         </tr>";
     }
     for ($ii = 0; $ii < 64; ++$ii) {
@@ -29,7 +34,7 @@
           <td>OBU$ii.Value1</td>
           <td>OBU$ii.Value2</td>
           <td>OBU$ii.Value3</td>
-          <td>`+randomStatus()+`</td>
+          <td>".randomStatus()."</td>
         </tr>";
     }
     ?>
