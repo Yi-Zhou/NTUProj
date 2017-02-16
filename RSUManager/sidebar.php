@@ -10,23 +10,24 @@
   <div class="sidebar-item expandable" id="rsu-list-expander">
     <span class="glyphicon glyphicon-triangle-right list-arrow"></span> RSU
   </div>
-  <div id="rsu-list" class="sidebar-sublist"></div>
+  <div id="rsu-list" class="sidebar-sublist">
+    <?php
+    for ($ii = 0; $ii < 64; ++$ii)
+      echo "<a href='#rsu$ii' class='sidebar-item detail-link'>RSU$ii</a>";
+    ?>
+  </div>
   <div class="sidebar-item expandable" id="obu-list-expander">
     <span class="glyphicon glyphicon-triangle-right list-arrow"></span> OBU
   </div>
-  <div id="obu-list" class="sidebar-sublist"></div>
+  <div id="obu-list" class="sidebar-sublist">
+  <?php
+    for ($ii = 0; $ii < 33; ++$ii)
+      echo "<a href='#obu$ii' class='sidebar-item detail-link'>OBU$ii</a>";
+  ?>
+  </div>
 </div>
 <script>
 $(function() {
-  for (var ii = 0; ii < 64; ++ii)
-    $("#rsu-list").append(`
-    <a href="#rsu`+ii+`" class="sidebar-item detail-link">RSU`+ii+`</a>
-    `);
-
-  for (var ii=0; ii < 33; ++ii)
-    $("#obu-list").append(`
-      <a href="#obu`+ii+`" class="sidebar-item detail-link">OBU`+ii+`</a>
-    `);
 
   var $items = $(".sidebar-item.expandable");
   $items.click(function(e) {
