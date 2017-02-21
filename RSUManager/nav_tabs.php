@@ -1,7 +1,6 @@
 <div class="tabs-wrapper">
   <ul class="tabs">
-    <li id="tab-overview" class="tab-item active"><a href="#">Overview</a></li>
-    <li id="tab-dashbrd"  class="tab-item"><a href="#">Dashboard</a></li>
+    <li id="tab-dashbrd" class="tab-item active"><a href="#">Dashboard</a></li>
     <li id="tab-devstat" class="tab-item"><a href="#">Device Status</a></li>
     <li id="tab-ops" class="tab-item"><a href="#">Operations</a></li>
     <li id="tab-events" class="tab-item"><a href="#">Events</a></li>

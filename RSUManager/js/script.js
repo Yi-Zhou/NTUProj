@@ -2,18 +2,13 @@ var dev_id;
 
 $(function() {
 
-  function bindDetailLink(e) {
-    $(".table-container").hide();
-    $(".main-container").show();
-    var $ele = $(e.target);
-    dev_id = $ele.text();
-    $.get("detail.php", {dev_id: dev_id}, function (data) {
-      $(".detail-container").html(data);
-    })
+  $("#tab-devstat").click(function() {
+    pageLoad(pages.DEV_STATUS);
+  });
 
-  }
-
-  $(".detail-link").click(bindDetailLink);
+  $("#tab-dashbrd").click(function() {
+    pageLoad(pages.DASHBOARD);
+  });
 
   var resizerActive = false;
   $(".resizer").mousedown(function(e) {
@@ -29,7 +24,7 @@ $(function() {
     {
       $(".resizer").css("left", e.pageX);
       $("section.sidebar").css("width", e.pageX);
-      $(".main-container, .table-container").css("padding-left", e.pageX);
+      $(".main-container").css("padding-left", e.pageX);
       $(".nav-tabs").css("left", e.pageX);
     }
   });
@@ -46,6 +41,8 @@ $(function() {
     $uploadForm.slideToggle(200);
   });
 
+  $("#tab-dashbrd").click();
+
 });
 
 function reboot() {
@@ -55,3 +52,4 @@ function reboot() {
 function sync() {
   confirm("Are you sure you want to synchronize configuration files on "+dev_id+"?");
 }
+

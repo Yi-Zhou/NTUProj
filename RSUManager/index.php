@@ -1,3 +1,6 @@
+<?php
+  $baseURL = "http://localhost:8000/";
+?>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -12,9 +15,13 @@
 
     <link href="css/glyphicon.css" rel="stylesheet">
     <link href="css/style.css" rel="stylesheet">
-    <script src="js/lib/jquery-3.1.1.min.js"></script>
-    <script src="js/script.js"></script>
 
+    <script src="js/lib/jquery-3.1.1.min.js"></script>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+ <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAbuDiYnmJ9KOZHdmqN00DrekE-4UpVexg" ></script>
+
+    <script src="js/config.js"></script>
+    <script src="js/script.js"></script>
   </head>
   <body> 
   <div class="main-site">
@@ -35,26 +42,7 @@
       include_once("nav_tabs.php");
       ?>
     </nav>
-    <section class="table-container">
-      <?php
-      include_once("overview_table.php");
-      ?>
-    </section>
     <section class="main-container">
-      <section class="detail-container">
-        <section class="ops-container">
-          <div class="ops-wrapper">
-            <button class="op-btn upgrade">Upgrade</button>
-            <button class="op-btn downgrade">Downgrade</button>
-            <button class="op-btn reboot" onclick="reboot()">Reboot</button>
-            <button class="op-btn sync" onclick="sync()">Sync</button>
-            <form action="" class="upload-form">
-              <input type="file" class="rsu-image" accept=".pdf" multiple/>
-              <button type="submit">Submit</button>
-            </form>
-          </div>
-        </section>
-      </section>
     </section>
   </div>
   <noscript>

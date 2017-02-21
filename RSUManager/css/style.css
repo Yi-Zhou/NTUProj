@@ -290,13 +290,6 @@ section.table-container, section.main-container {
     top: 8rem;
 }
 
-section.table-container {
-    position: absolute;
-    height: inherit;
-    width: 100%;
-    overflow: scroll;
-}
-
 .table-wrapper {
     padding: 1rem 2rem 10rem 2rem;
 }
@@ -320,11 +313,11 @@ table.rsu-table tr:nth-child(even) {
 
 .main-container {
     position: absolute;
-    display: none;
     width: 100%;
     height: inherit;
     background-color: #fcfcfc;
-}
+    overflow: scroll;
+};
 
 .ops-wrapper {
     padding: 1rem 0 0 7rem;
@@ -334,9 +327,15 @@ table.rsu-table tr:nth-child(even) {
     padding: 8rem 0 0 8rem;
 }
 
-img.map {
-    width: 20rem;
-    height: 20rem;
+.detail-container {
+    height: 100%;
+}
+
+#location-map {
+    height: 30rem;
+    width: 45%;
+    display: inline-block;
+    vertical-align: top;
 }
 
 form.upload-form {
@@ -354,21 +353,15 @@ ul.detail-attr-list li {
 }
 
 .detail-attr-wrapper {
-    display: inline-block;
-    vertical-align: top;
-    padding-top: 1.5rem;
     width: 49%;
+    display: inline-block;
+    padding-top: 1.5rem;
+    vertical-align: top;
 }
 
 .detail-ops-wrapper {
     margin-top: 5rem;
     height: 50%;
-}
-
-.location-map {
-    display: inline-block;
-    overflow: scroll;
-    vertical-align: top;
 }
 
 span.attr {
@@ -386,3 +379,11 @@ span.attr {
     font-weight: bold;
 }
 
+#refresh-btn {
+    vertical-align: top;
+    display: inline-block;
+}
+
+#piechart {
+    display: inline-block;
+}
