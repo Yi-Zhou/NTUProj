@@ -126,7 +126,7 @@ ul.hdr-nav-list > li > a {
     font-size: 2rem;
 }
 
-nav.nav-tabs {
+.nav-tabs {
     position: absolute;
     height: 4rem;
     width: 100%;

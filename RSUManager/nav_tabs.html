@@ -6,13 +6,3 @@
     <li id="tab-events" class="tab-item"><a href="#">Events</a></li>
   </ul>
 </div>
-<script type="text/javascript">
-
-  function nav_click(_this, nav_name) {
-    $("."+nav_name+"-item.active").removeClass("active");
-    $(_this).addClass("active");
-  }
-
-  $(".tab-item").click(function() {nav_click(this, "tab")});
-  
-</script>
