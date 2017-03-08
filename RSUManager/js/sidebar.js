@@ -1,7 +1,7 @@
 define(["jquery", "util", "detail"], function($, util, detail) {
   "use strict";
   return {
-    execute: function() {
+    render: function() {
       var $items = $(".sidebar-item.expandable");
       $items.click(function(e) {
         var $ele = $(e.target);
@@ -61,7 +61,7 @@ define(["jquery", "util", "detail"], function($, util, detail) {
           $(".tab-item.active").removeClass("active");
           var dev_id = this.text;
           util.pageLoad(util.pages.DETAIL, {dev_id: dev_id}, function() {
-            detail.execute({dev_id: dev_id});
+            detail.render({dev_id: dev_id});
           });
         });
       }

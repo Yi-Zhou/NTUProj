@@ -1,7 +1,7 @@
 define(["util", "gmap"], function(util) {
   "use strict";
 
-  function render(dev) {
+  function render_data(dev) {
     console.log(dev);
     $(".val[name=ipv4_val]>").text(dev.ipv4_address);
     $(".val[name=its_version_val]").text(dev.its_framework_version);
@@ -21,26 +21,18 @@ define(["util", "gmap"], function(util) {
   }
 
   return {
-    execute: function(data) {
-
-      $("#detail-attr-container").append(`
-        <h1 class="detail-title"></h1>
-        <ul class="detail-attr-list">
-          <li><span class="attr" name="ipv4"><strong>IPv4:</strong></span> <span class="val" name="ipv4_val"><span></li>
-          <li><span class="attr" name="its_version"><strong>ITS Version:</strong></span> <span class="val" name="its_version_val"></span></li>
-          <li><span class="attr" name="image"><strong>Image:</strong></span> <span class="val" name="image_version_val"></span></li>
-          <li><span class="attr" name="python_version"><strong>Python Version:</strong></span> <span class="val" name="python_version_val"></span></li>
-        </ul>
-      `);
+    render: function(data) {
 
       var dev = util.lazyGetDevStat(data.dev_id);
       if (dev) {
-        render(dev);
+        console.log("here");
+        render_data(dev);
       }
       else {
         util.ajax(util.backendUrls.getCurrentDevStat, function(resp) {
           dev = resp.device_status[0];
-          render(dev);
+          console.log("there");
+          render_data(dev);
         })
       }
     }

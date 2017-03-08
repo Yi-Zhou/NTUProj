@@ -2,9 +2,12 @@ define(["jquery"], function() {
   "use strict";
 
   var baseURL = "http://localhost:8000/";
+  var serverURL = "http://172.21.26.57:8080/";
+  serverURL = baseURL;
   var storage = {
     keys: {
       DEV_STAT: "devstat",
+      EVENT_LIST: "eventlist"
     },
     set: function(key, val) {
       localStorage.setItem(key, val);
@@ -36,48 +39,69 @@ define(["jquery"], function() {
 
   return {
     baseURL: baseURL,
+    serverURL: serverURL,
 
     backendURLs: Object.freeze({
       getDevStat: {
-        url: baseURL + "infrastructure/rest/v1/cdm/getDeviceStatus",
+        url: serverURL + "infrastructure/rest/v1/cdm/getDeviceStatus",
         method: "get"
       },
 
       getCurrentDevStat: {
-        url: baseURL + "infrastructure/rest/v1/cdm/getCurrentDeviceStatus",
+        url: serverURL + "infrastructure/rest/v1/cdm/getCurrentDeviceStatus",
         method: "get"
       },
-      getTransacLog: {
-        url: baseURL + "infrastructure/rest/v1/cdm/getTransactionLog",
+      getEventList: {
+        url: serverURL + "infrastructure/rest/v1/cdm/getTransactionLog",
         method: "get"
       },
       getITSFramVersions: {
-        url: baseURL + "infrastructure/rest/v1/cdm/getITSFramVersions",
+        url: serverURL + "infrastructure/rest/v1/cdm/getITSFramVersions",
         method: "get"
       },
       getImgVersions: {
-        url: baseURL + "infrastructure/rest/v1/cdm/getImagesVersions",
+        url: serverURL + "infrastructure/rest/v1/cdm/getImagesVersions",
         method: "get"
       },
       upgradeDevice: {
-        url: baseURL + "infrastructure/rest/v1/cdm/upgradeDevice",
-        method: "post"
+        url: serverURL + "infrastructure/rest/v1/cdm/upgradeDevice",
+        method: "post",
+        data: function(devs, its_version, image_version) {
+          this.devices = devs,
+          this.its_framework_version = its_version,
+          this.image_version = image_version
+        }
       },
       downgradeDevice: {
-        url: baseURL + "infrastructure/rest/v1/cdm/downgradeDevice",
-        method: "post"
+        url: serverURL + "infrastructure/rest/v1/cdm/downgradeDevice",
+        method: "post",
+        data: function(devs, its_version, image_version) {
+          this.devices = devs,
+          this.its_framework_version = its_version,
+          this.image_version = image_version
+        }
       },
-      upgradeITSFram: {
-        url: baseURL + "infrastructure/rest/v1/cdm/upgradeITSFramework",
-        method: "post"
+      changeItsFramework: {
+        url: serverURL + "infrastructure/rest/v1/cdm/upgradeITSFramework",
+        method: "post",
+        data: function(devs, its_version) {
+          this.devices = devs,
+          this.its_framework_version = its_version
+        }
       },
       syncConfig: {
-        url: baseURL + "infrastructure/rest/v1/cdm/syncConfig",
-        method: "post"
+        url: serverURL + "infrastructure/rest/v1/cdm/syncConfig",
+        method: "post",
+        data: function(devs) {
+          this.devices = devs
+        }
       },
-      rebootDev: {
-        url: baseURL + "infrastructure/rest/v1/cdm/rebootDevice",
-        method: "post"
+      rebootDevice: {
+        url: serverURL + "infrastructure/rest/v1/cdm/rebootDevice",
+        method: "post",
+        data: function(devs) {
+          this.devices = devs
+        }
       }
     }),
 
@@ -98,7 +122,20 @@ define(["jquery"], function() {
         file: baseURL + "detail.html",
         url: "detail",
         method: "get"
-      }
+      },
+
+      OPERATIONS: {
+        file: baseURL + "operations.html",
+        url: "ops",
+        method: "get"
+      },
+
+      EVENTS: {
+        file: baseURL + "events.html",
+        url: "events",
+        method: "get"
+      },
+
     }),
 
     ajax: function (urlObj, data, suc_func, err_func, settings) {
@@ -185,8 +222,6 @@ define(["jquery"], function() {
         }
         return devs;
       }
-      console.log(typeof devs);
-      console.log(devs);
       return null;      
     },
 
@@ -195,6 +230,32 @@ define(["jquery"], function() {
         storage.setJson(storage.keys.DEV_STAT, devstat);
       else
         storage.set(storage.keys.DEV_STAT, devstat);
+    },
+
+    setEventList: function(eventlist) {
+      if ($.isPlainObject(eventlist) || $.isArray(eventlist)) 
+        storage.setJson(storage.keys.EVENT_LIST, eventlist);
+      else
+        storage.set(storage.keys.EVENT_LIST, eventlist);
+    },
+
+    lazyGetEventList: function() {
+      var eventlist = storage.getJson(storage.keys.EVENT_LIST);
+      return eventlist;
+    },
+
+    unloadCallback: function(callback) {
+      $(".tab-item").not("active").click(callback);
+      $(".detail-link").click(callback);
+    },
+
+    confirm: function(call, msg) {
+      if (msg === undefined) msg = "Are you sure to continue?";
+      var ans = confirm(msg);
+      console.log(ans);
+      if (ans) return call;
+      else return function() {};
     }
+
   }
 });

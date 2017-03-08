@@ -129,20 +129,16 @@ ul.hdr-nav-list > li > a {
 .nav-tabs {
     position: absolute;
     height: 4rem;
-    width: 100%;
+    width: calc(100% - 24rem);
+    background: #fafafa;
 }
+
 
 ul.tabs {
     list-style-type: none;
 }
 
-div.tabs-wrapper {
-    position: absolute;
-}
-
-ul.tabs > li {
-    width: 12rem;
-    float: left;
+ul.tabs > li.tab-item, #refresh-btn{
     text-align: center;
     line-height: 4rem;
     border-right: #e8e8e8 1px solid;
@@ -151,6 +147,16 @@ ul.tabs > li {
     background: -o-radial-gradient(#efefef, #fafafa);
     background: -moz-radial-gradient(#efefef, #fafafa);
     background: radial-gradient(#efefef, #fafafa);
+}
+
+ul.tabs > li.tab-item {
+    float: left;
+    width: 12rem;
+}
+
+#refresh-btn {
+    border-left: #e8e8e8 1px solid;
+    width: 5rem;
 }
 
 ul.tabs > li:hover {
@@ -291,7 +297,11 @@ section.table-container, section.main-container {
 }
 
 .table-wrapper {
-    padding: 1rem 2rem 10rem 2rem;
+    padding-top: 1rem;
+    padding-right: 2rem;
+    padding-left: 2rem;
+    position: relative; 
+    height: 100%;
 }
 
 table.rsu-table {
@@ -316,7 +326,6 @@ table.rsu-table tr:nth-child(even) {
     width: 100%;
     height: inherit;
     background-color: #fcfcfc;
-    overflow: scroll;
 };
 
 .ops-wrapper {
@@ -385,5 +394,41 @@ span.attr {
 }
 
 #piechart {
+    width: 49%;
+    height: 30rem;
     display: inline-block;
 }
+
+#overview-table {
+    width: 49%;
+}
+
+footer.op-list {
+    position: absolute;
+    bottom: 9rem;
+    height: 2.5rem;
+    width: 100%;
+    overflow:hidden;
+}
+
+.ops-btns {
+    list-style: none;
+    height: 2rem;
+}
+
+.ops-btn-item {
+    width: 12rem;
+    height: 2rem;
+    display: inline-block;
+    float: left;
+}
+
+.ops-btn-item > .op-btn {
+    width: 100%;
+}
+
+
+.devstat-table {
+    height: inherit;
+}
+
