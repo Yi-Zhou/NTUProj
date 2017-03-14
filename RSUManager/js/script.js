@@ -48,13 +48,4 @@ define(["util", "sidebar", "nav_tabs"], function(util, sidebar, nav_tabs) {
     });
 
   });
-
-  function reboot() {
-    confirm("Are you sure you want to reboot "+dev_id+"?");
-  }
-
-  function sync() {
-    confirm("Are you sure you want to synchronize configuration files on "+dev_id+"?");
-  }
-
 });
