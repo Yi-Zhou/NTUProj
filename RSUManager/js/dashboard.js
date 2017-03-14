@@ -13,8 +13,8 @@ define(["util", "gloader"], function(util) {
 
     var options = {
       title: 'Availability of Devices at '+new Date().toLocaleString(),
-      pieSliceText: 'value-and-percentage',
-      colors: ["#0085ff", "#4ca9ff", "#ff7400", "#ff4d00"],
+      pieSliceText: 'percentage',
+      colors: ["#0085ff", "#4ca9ff", "#ff4d00", "#ff7400"],
       backgroundColor: {fill: "#fefefe"}
     };
 
@@ -59,11 +59,11 @@ define(["util", "gloader"], function(util) {
     for (var i = 0; i < len; ++i)
     {
       var dev = devs[i];
-      if (dev.status === "available" && dev.device_type === "RSU") 
+      if (dev.status === "online" && dev.device_type === "RSU") 
         values.rsu_online_num++;
       else if (dev.device_type === "RSU") 
         values.rsu_offline_num++;
-      else if (dev.status === "available" && dev.device_type === "OBU") 
+      else if (util.isOnline(dev) && dev.device_type === "OBU") 
         values.obu_online_num++;
       else if (dev.device_type === "OBU") 
         values.obu_offline_num++;
@@ -73,10 +73,6 @@ define(["util", "gloader"], function(util) {
       drawChart(values);
       drawTable(values);
     });
-  }
-
-  function refresh() {
-    util.ajax(util.backendURLs.getCurrentDevStat, callback);
   }
 
   function onWindowResize() {
@@ -90,40 +86,55 @@ define(["util", "gloader"], function(util) {
     drawCharts(ev.data.devstat);
   }
 
+  function callback (resp) {
+    var devstat = resp.device_status;
+    util.setDevStat(devstat);
+
+    dataRequiredOps(devstat);
+    util.unloadCallback(unload);
+  }
+
+  function refresh() {
+    util.ajax(util.backendURLs.getCurrentDevStat, callback);
+  }
+
   function unload() {
     // when click away
     $(window).off("resize", onWindowResize);
     $(window).off("resizeEnd", onWindowResizeEnd);
     $("#refresh-btn").off("click", refresh);
+    $(".resizer").off("mouseup", onWindowResizeEnd);
+  }
+
+  function dataRequiredOps(devstat) {
+    $(window).on('resizeEnd', {devstat: devstat}, onWindowResizeEnd);
+    $(".resizer").on("mouseup", {devstat: devstat}, onWindowResizeEnd);
+    drawCharts(devstat);
   }
 
   return {
     render: function() {
 
       var devstat = util.lazyGetDevStat();
-
-      function callback (resp) {
-        console.log(resp);
-        util.setDevStat(resp.device_status);
-        drawCharts(resp.device_status);
-      }
+      console.log(devstat);
 
       if (!devstat)
       {
         console.log("load failed");
         util.ajax(util.backendURLs.getCurrentDevStat, callback);
+        //redraw graph when window resize is completed  
       }
       else 
-        drawCharts(devstat);
+      {
+        dataRequiredOps(devstat);
+      }
 
+      $(window).resize(onWindowResize);
 
       $("#refresh-btn").click(refresh);
 
       //create trigger to resizeEnd event     
-      $(window).resize(onWindowResize);
 
-      //redraw graph when window resize is completed  
-      $(window).on('resizeEnd', {devstat: devstat}, onWindowResizeEnd);
       util.unloadCallback(unload);
     }
   }

@@ -1,5 +1,6 @@
 requirejs.config({
   baseUrl: "js",
+  waitSeconds: 30,
   paths: {
     util: "util",
     jquery: "lib/jquery-3.1.1.min",

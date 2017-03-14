@@ -7,7 +7,7 @@ define(["util", "gloader"], function(util) {
     dataTable.addColumn('string', 'Operation');
     dataTable.addColumn('string', 'Status');
     dataTable.addColumn('string', 'Log');
-    dataTable.addColumn('datetime', 'Timestamp');
+    dataTable.addColumn('string', 'Timestamp');
 
     var len = eventlist.length;
       for (var ii = 0; ii < len; ++ii)
@@ -15,7 +15,7 @@ define(["util", "gloader"], function(util) {
         var ev = eventlist[ii];
 
         dataTable.addRows([
-          [ev.event_type, ev.operation, ev.status, ev.log, new Date(ev.timestamp)]
+          [ev.event_type, ev.operation, ev.status, ev.log, ev.timestamp]
         ]);
       }
     var table = new google.visualization.Table(document.getElementById('event-table'));

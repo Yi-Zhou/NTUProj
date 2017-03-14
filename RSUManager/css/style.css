@@ -326,10 +326,6 @@ table.rsu-table tr:nth-child(even) {
     width: 100%;
     height: inherit;
     background-color: #fcfcfc;
-};
-
-.ops-wrapper {
-    padding: 1rem 0 0 7rem;
 }
 
 .detail-wrapper {
@@ -368,7 +364,7 @@ ul.detail-attr-list li {
     vertical-align: top;
 }
 
-.detail-ops-wrapper {
+nav.ops-nav {
     margin-top: 5rem;
     height: 50%;
 }
@@ -403,8 +399,8 @@ span.attr {
     width: 49%;
 }
 
-footer.op-list {
-    position: absolute;
+footer.ops {
+    margin-top: 1rem;
     bottom: 9rem;
     height: 2.5rem;
     width: 100%;
@@ -432,3 +428,56 @@ footer.op-list {
     height: inherit;
 }
 
+.overlay {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: rgba(0,0,0,0.5);
+    transition: opacity 200ms;
+    display: none;
+    background: rgba(255,255,255,0.5);
+}
+
+.popup-cancel {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    cursor: default;
+}
+
+.popup {
+    margin: 75px auto;
+    padding: 20px;
+    background: #fff;
+    border: 1px solid #666;
+    width: 300px;
+    position: relative;
+    border-color: #aaa;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.25);
+}
+
+.popup-close {
+    position: absolute;
+    top: .3rem;
+    height: 2rem;
+    right: 1rem;
+    opacity: 0.8;
+    transition: all 200ms;
+    font-size: 24px;
+    font-weight: bold;
+    text-decoration: none;
+    color: #666;
+    &:hover {
+      opacity: 1;
+    }
+}
+
+.popup-content {
+    margin: 0 1rem 0 0;
+}
+
+.update-btns {
+    margin-top: 2rem;
+}

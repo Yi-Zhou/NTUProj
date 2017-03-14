@@ -2,8 +2,9 @@
   <div class="detail-wrapper">
     <div class="detail-attr-wrapper" id="detail-attr-container">
       <h1 class="detail-title"></h1>
+      <input type="checkbox" class="device-selector" style="display:none" checked>
       <ul class="detail-attr-list">
-        <li><span class="attr" name="ipv4"><strong>IPv4:</strong></span> <span class="val" name="ipv4_val"><span></li>
+        <li><span class="attr" name="ipv4"><strong>IPv4:</strong></span> <span class="val" name="ipv4_val"></span></li>
         <li><span class="attr" name="its_version"><strong>ITS Version:</strong></span> <span class="val" name="its_version_val"></span></li>
         <li><span class="attr" name="image"><strong>Image:</strong></span> <span class="val" name="image_version_val"></span></li>
         <li><span class="attr" name="python_version"><strong>Python Version:</strong></span> <span class="val" name="python_version_val"></span></li>
@@ -11,16 +12,8 @@
     </div>
     <div id="location-map"></div>
     <section class="ops-container">
-      <div class="ops-wrapper">
-        <button class="op-btn upgrade">Upgrade</button>
-        <button class="op-btn downgrade">Downgrade</button>
-        <button class="op-btn reboot" onclick="reboot()">Reboot</button>
-        <button class="op-btn sync" onclick="sync()">Sync</button>
-        <form action="" class="upload-form">
-          <input type="file" class="rsu-image" accept=".pdf" multiple/>
-          <button type="submit">Submit</button>
-        </form>
-      </div>
+      <nav class="ops-nav">
+      </nav>
     </section>
   </div>
 </div>

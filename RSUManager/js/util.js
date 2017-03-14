@@ -3,7 +3,7 @@ define(["jquery"], function() {
 
   var baseURL = "http://localhost:8000/";
   var serverURL = "http://172.21.26.57:8080/";
-  serverURL = baseURL;
+  //serverURL = baseURL;
   var storage = {
     keys: {
       DEV_STAT: "devstat",
@@ -37,6 +37,32 @@ define(["jquery"], function() {
     }
   };
 
+  function trimDevices(devs) {
+    var len = devs.length;
+    var arr = [];
+    for (var ii = 0; ii < len; ++ii) {
+      var dev = devs[ii];
+      arr.push({
+        device_id: dev.device_id,
+        device_type: dev.device_type,
+      });
+    } 
+    return arr;
+  }
+
+  function serialize(obj) {
+    var str = [];
+    for(var p in obj)
+    {
+      if (obj.hasOwnProperty(p)) {
+        str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
+      }
+    }
+    var final = "?"+str.join("&");
+    if (final.length !== 1) return final;
+    return "";
+  }
+
   return {
     baseURL: baseURL,
     serverURL: serverURL,
@@ -67,16 +93,16 @@ define(["jquery"], function() {
         url: serverURL + "infrastructure/rest/v1/cdm/upgradeDevice",
         method: "post",
         data: function(devs, its_version, image_version) {
-          this.devices = devs,
+          this.devices = trimDevices(devs),
           this.its_framework_version = its_version,
-          this.image_version = image_version
+          this.image_version = image_version;
         }
       },
       downgradeDevice: {
         url: serverURL + "infrastructure/rest/v1/cdm/downgradeDevice",
         method: "post",
         data: function(devs, its_version, image_version) {
-          this.devices = devs,
+          this.devices = trimDevices(devs),
           this.its_framework_version = its_version,
           this.image_version = image_version
         }
@@ -85,7 +111,7 @@ define(["jquery"], function() {
         url: serverURL + "infrastructure/rest/v1/cdm/upgradeITSFramework",
         method: "post",
         data: function(devs, its_version) {
-          this.devices = devs,
+          this.devices = trimDevices(devs);
           this.its_framework_version = its_version
         }
       },
@@ -93,14 +119,14 @@ define(["jquery"], function() {
         url: serverURL + "infrastructure/rest/v1/cdm/syncConfig",
         method: "post",
         data: function(devs) {
-          this.devices = devs
+          this.devices = trimDevices(devs);
         }
       },
       rebootDevice: {
         url: serverURL + "infrastructure/rest/v1/cdm/rebootDevice",
         method: "post",
         data: function(devs) {
-          this.devices = devs
+          this.devices = trimDevices(devs);
         }
       }
     }),
@@ -126,7 +152,7 @@ define(["jquery"], function() {
 
       OPERATIONS: {
         file: baseURL + "operations.html",
-        url: "ops",
+        url: "operations",
         method: "get"
       },
 
@@ -135,6 +161,29 @@ define(["jquery"], function() {
         url: "events",
         method: "get"
       },
+
+      UPGRADE: {
+        file: baseURL + "update.html",
+        url: "upgrade",
+        method: "get"
+      },
+
+      DOWNGRADE: {
+        file: baseURL + "update.html",
+        url: "downgrade",
+        method: "get"
+      },
+
+      CHANGE_ITS: {
+        file: baseURL + "update.html",
+        url: "change_its",
+        method: "get"
+      },
+
+      DEV_CONTROL: {
+        file: baseURL + "dev_control.html",
+        method: "get"
+      }
 
     }),
 
@@ -156,7 +205,9 @@ define(["jquery"], function() {
 
       if (!$.isFunction(err_func)) {
         settings = err_func;
-        err_func = undefined;
+        err_func = function(data) {
+          if (data.status === 500) alert("internal error");
+        };
       }
 
       settings = settings || {};
@@ -168,7 +219,6 @@ define(["jquery"], function() {
         data: data,
         success: suc_func,
         error: err_func,
-        dataType: "json"
       };
       $.extend(settings_obj, settings);
 
@@ -202,7 +252,8 @@ define(["jquery"], function() {
           pageObj.title = pageObj.title || "SMTB | Control Panel";
           if ($.isFunction(callback)) 
             callback.apply(this, args);
-          window.history.pushState(html, pageObj.pageTitle, pageObj.url);
+          if (pageObj.url) 
+            window.history.pushState(html, pageObj.pageTitle, pageObj.url+serialize(data));
         }
       });
     },
@@ -255,7 +306,21 @@ define(["jquery"], function() {
       console.log(ans);
       if (ans) return call;
       else return function() {};
-    }
+    }, 
 
+    isOnline: function(dev) {
+      if (dev.status === "online") return true;
+      return false;
+    },
+    
+    displayMessage: function(msg) {
+      $(".overlay").show();
+      $(".popup-content").html(msg);
+    },
+
+    toTitileCase: function(str) {
+      // reference: http://stackoverflow.com/questions/196972/convert-string-to-title-case-with-javascript
+      return str.replace(/\w\S*/g, function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();});
+    }
   }
 });

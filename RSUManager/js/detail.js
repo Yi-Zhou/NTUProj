@@ -1,13 +1,14 @@
-define(["util", "gmap"], function(util) {
+define(["util", "dev_control", "gmap"], function(util, dev_control) {
   "use strict";
 
   function render_data(dev) {
     console.log(dev);
-    $(".val[name=ipv4_val]>").text(dev.ipv4_address);
+    $(".val[name=ipv4_val]").text(dev.ipv4_address);
     $(".val[name=its_version_val]").text(dev.its_framework_version);
     $(".val[name=image_version_val]").text(dev.image_version);
     $(".val[name=python_version_val]").text("3.4.1");
     $(".detail-title").text(dev.device_id);
+    $("input.device-selector:checked").val(JSON.stringify(dev));
 
     if (dev.device_type === "RSU")
     {
@@ -21,6 +22,10 @@ define(["util", "gmap"], function(util) {
   }
 
   return {
+    unload: function() {
+      dev_control.unload();
+    },
+
     render: function(data) {
 
       var dev = util.lazyGetDevStat(data.dev_id);
@@ -35,6 +40,9 @@ define(["util", "gmap"], function(util) {
           render_data(dev);
         })
       }
+      util.pageLoad(util.pages.DEV_CONTROL, ".ops-nav", function() {
+        dev_control.render();
+      });
     }
   }
 });

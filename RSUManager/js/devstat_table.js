@@ -14,7 +14,7 @@ define(["util", "detail", "gloader"], function(util, detail) {
       for (var ii = 0; ii < len; ++ii)
       {
         var dev = devs[ii];
-        var font_color = dev.status === "available"? "green": "red";
+        var font_color = util.isOnline(dev)? "green": "red";
 
         dataTable.addRows([
           ["<a href='#"+dev.device_id+"' class='id-column detail-link'>"+dev.device_id+"</a>",  dev.ipv4_address, "<span style='color: "+font_color+"'>"+dev.status+"</span>", dev.its_framework_version],
