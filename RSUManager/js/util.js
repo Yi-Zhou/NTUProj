@@ -250,10 +250,10 @@ define(["jquery"], function() {
         success: function(html) {
           $(selector).html(html);
           pageObj.title = pageObj.title || "SMTB | Control Panel";
-          if ($.isFunction(callback)) 
-            callback.apply(this, args);
           if (pageObj.url) 
             window.history.pushState(html, pageObj.pageTitle, pageObj.url+serialize(data));
+          if ($.isFunction(callback)) 
+            callback.apply(this, args);
         }
       });
     },
@@ -266,7 +266,7 @@ define(["jquery"], function() {
         if (dev_id) {
           for (var key in devs) {
             var dev = devs[key];
-            if (dev.device_id === dev_id) 
+            if (dev.device_id === dev_id)
               return dev;
           }
           return null;
@@ -296,8 +296,11 @@ define(["jquery"], function() {
     },
 
     unloadCallback: function(callback) {
-      $(".tab-item").not("active").click(callback);
-      $(".detail-link").click(callback);
+      var args = [].slice.call(arguments, 1);
+      $(window).on("pushstate", function temp() {
+        callback.apply(this, args);
+        $(window).off("pushstate", temp);
+      });
     },
 
     confirm: function(call, msg) {

@@ -1,5 +1,16 @@
 
-id + display name
-post
-one by one device status request
+id + display name "..."
 busy icon
+search bar in device status tab search by id^
+map and offline devs in dashboard 
+map in operations
+
+multiple devices upgrade*
+full names of operation btns
+ID -> Device ID
+refresh in detail^
+no refresh in operations
+click on column to select in operations tab
+multiple ids
+no device type for getitsframe/image
+one by one device status request*

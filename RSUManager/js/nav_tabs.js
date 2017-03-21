@@ -31,6 +31,24 @@ define(["util", "devstat_table", "dashboard", "operations", "events"], function(
       });
       $(".tab-item").click(function() {nav_click(this, "tab")});
       $("#tab-dashbrd").click();
+    },
+    click: function(tab_name) {
+      switch(tab_name) {
+        case "dashboard":
+        $("#tab-dashbrd").click();
+        break;
+        case "devStatus":
+        $("#tab-devstat").click();
+        break;
+        case "operations":
+        $("#tab-ops").click();
+        break;
+        case "events":
+        $("#tab-events").click();
+        break;
+        default:
+        break;
+      }
     }
   }
 });

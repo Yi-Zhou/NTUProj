@@ -12,7 +12,7 @@ define(["jquery", "util", "detail"], function($, util, detail) {
         for (var ii = 0; ii < len; ++ii) {
           var dev = devs[ii];
           var dev_id = dev.device_id;
-          var ele = "<a href='#"+dev_id+"' class='sidebar-item detail-link'>"+dev_id+"</a>";
+          var ele = "<a href='#"+dev_id+"' device_type='"+dev.device_type+"' class='sidebar-item detail-link'>"+dev_id+"</a>";
           if (dev.device_type === "RSU")
             $("#rsu-list").append(ele);
           else if (dev.device_type === "OBU")
@@ -21,8 +21,9 @@ define(["jquery", "util", "detail"], function($, util, detail) {
         $(".detail-link").click(function() {
           $(".tab-item.active").removeClass("active");
           var dev_id = this.text;
-          util.pageLoad(util.pages.DETAIL, {dev_id: dev_id}, function() {
-            detail.render({dev_id: dev_id});
+          var device_type = this.getAttribute("device_type");
+          util.pageLoad(util.pages.DETAIL, {device_id: dev_id, device_type: device_type}, function() {
+            detail.render({device_id: dev_id, device_type: device_type});
           });
         });
         var $items = $(".sidebar-item.expandable");
@@ -55,8 +56,10 @@ define(["jquery", "util", "detail"], function($, util, detail) {
         }
         else 
         {
+          $("#search-input").val("");
           $(".sidebar-item.expandable").show();
-          $(".sidebar-sublist").hide();
+          $(".expandable").next().hide();
+          $(".expandable.expanded").next().show();
           $("#search-clear-btn").hide();
         }
 

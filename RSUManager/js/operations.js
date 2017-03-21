@@ -4,10 +4,17 @@ define(["util", "detail", "dev_control", "gloader"], function(util, detail, dev_
   function drawTable(devs) {
     var dataTable = new google.visualization.DataTable();
     dataTable.addColumn('string', ' ');
-    dataTable.addColumn('string', 'ID');
-    dataTable.addColumn('string', 'IP Address');
-    dataTable.addColumn('string', 'Status');
+    dataTable.addColumn('string', 'Device ID');
+    dataTable.addColumn('string', 'Type');
+    dataTable.addColumn('string', 'MAC Address');
+    dataTable.addColumn('string', 'IPv4 Address');
+    dataTable.addColumn('string', 'IPv6 Address');
+    dataTable.addColumn('string', 'Active Image');
+    dataTable.addColumn('string', 'Image Version');
     dataTable.addColumn('string', 'ITS Version');
+    dataTable.addColumn('string', 'Status');
+    dataTable.addColumn('string', 'Timestamp');
+    dataTable.addColumn('string', 'Config Path');
 
     var len = devs.length;
       for (var ii = 0; ii < len; ++ii)
@@ -16,7 +23,7 @@ define(["util", "detail", "dev_control", "gloader"], function(util, detail, dev_
         var font_color = util.isOnline(dev)? "green": "red";
 
         dataTable.addRows([
-          ["<input type='checkbox' class='device-selector' value='"+JSON.stringify(dev)+"'/>", "<a href='#"+dev.device_id+"' class='id-column detail-link' style='width: 100%'>"+dev.device_id+"</a>",  dev.ipv4_address, "<span style='color: "+font_color+"'>"+dev.status+"</span>", dev.its_framework_version],
+          ["<input type='checkbox' class='device-selector' value='"+JSON.stringify(dev)+"'/>", "<a href='#"+dev.device_id+"' device_type='"+dev.device_type+"' class='id-column detail-link'>"+dev.device_id+"</a>", dev.device_type, dev.device_mac, dev.ipv4_address, dev.ipv6_address, dev.active_image, dev.image_version, dev.its_framework_version, "<span style='color: "+font_color+"'>"+dev.status+"</span>", dev.timestamp, dev.app_config_path],
         ]);
       }
     var table = new google.visualization.Table(document.getElementById('devstat-table-ops'));
@@ -32,10 +39,17 @@ define(["util", "detail", "dev_control", "gloader"], function(util, detail, dev_
 
     $(".id-column.detail-link").click(function() {
       var dev_id = this.text;
+      var device_type = this.getAttribute("device_type");
       util.pageLoad(util.pages.DETAIL, function() {
-        detail.render({dev_id: dev_id});
+        detail.render({device_id: dev_id, device_type: device_type});
       });
+      $(".tab-item.active").removeClass("active");
     });
+
+    $(".google-visualization-table-table tr").click(function() {
+      console.log("clicked");
+      $(this).find("input.device-selector").click();
+    })
   }
 
   function callback(resp) {
@@ -49,7 +63,7 @@ define(["util", "detail", "dev_control", "gloader"], function(util, detail, dev_
   }
 
   function unload(e) {
-    $("#refresh-btn").off("click", refresh);
+    $("#refresh-btn").show();
     dev_control.unload();
   }
 
@@ -65,7 +79,7 @@ define(["util", "detail", "dev_control", "gloader"], function(util, detail, dev_
       else 
         drawTable(devs);
 
-      $("#refresh-btn").click(refresh);
+      $("#refresh-btn").hide();
 
       util.unloadCallback(unload);
 

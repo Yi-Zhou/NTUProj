@@ -91,7 +91,6 @@ define(["util", "gloader"], function(util) {
     util.setDevStat(devstat);
 
     dataRequiredOps(devstat);
-    util.unloadCallback(unload);
   }
 
   function refresh() {
@@ -121,21 +120,18 @@ define(["util", "gloader"], function(util) {
       if (!devstat)
       {
         console.log("load failed");
-        util.ajax(util.backendURLs.getCurrentDevStat, callback);
+        util.ajax(util.backendURLs.getDevStat, callback);
         //redraw graph when window resize is completed  
       }
       else 
       {
         dataRequiredOps(devstat);
       }
-
       $(window).resize(onWindowResize);
 
       $("#refresh-btn").click(refresh);
-
-      //create trigger to resizeEnd event     
-
       util.unloadCallback(unload);
+
     }
   }
 });

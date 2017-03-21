@@ -1,5 +1,8 @@
 
 define(["util", "update"], function(util, update) {
+  "use strict";
+
+  var from_page;
 
   function getSelectedDevices() {
     var devices = [];
@@ -20,31 +23,24 @@ define(["util", "update"], function(util, update) {
 
   function upgradeDevice() {
     var devs = getSelectedDevices();
-    if (devs.length > 1) {
-      util.displayMessage(OneDeviceMessage);
-      return;
-    }
+    console.log(from_page);
     if (devs.length === 0) {
       util.displayMessage(noDevMessage); 
       return;
     }
     util.pageLoad(util.pages.UPGRADE, function() {
-      update.render(devs, "upgrade");
+      update.render(devs, "upgrade", from_page);
     });
   }
 
   function downgradeDevice() {
     var devs = getSelectedDevices();
-    if (devs.length > 1) {
-      util.displayMessage(OneDeviceMessage);
-      return;
-    }
     if (devs.length === 0) {
       util.displayMessage(noDevMessage); 
       return;
     }
     util.pageLoad(util.pages.DOWNGRADE, function() {
-      update.render(devs, "downgrade");
+      update.render(devs, "downgrade", from_page);
     });
 
   }
@@ -73,16 +69,12 @@ define(["util", "update"], function(util, update) {
 
   function changeItsFramework() {
     var devs = getSelectedDevices();
-    if (devs.length > 1) {
-      util.displayMessage(OneDeviceMessage);
-      return;
-    }
     if (devs.length === 0) {
       util.displayMessage(noDevMessage); 
       return;
     }
     util.pageLoad(util.pages.CHANGE_ITS, function() {
-      update.render(devs, "change_its");
+      update.render(devs, "change_its", from_page);
     });
   }
 
@@ -90,7 +82,8 @@ define(["util", "update"], function(util, update) {
     unload: function() {
     },
 
-    render: function() {
+    render: function(frm_pge) {
+      from_page = frm_pge;
       $("button[name='upgrade-btn']").click(upgradeDevice);
       $("button[name='downgrade-btn']").click(downgradeDevice);
       $("button[name='sync-btn']").click(function() {
