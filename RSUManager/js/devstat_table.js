@@ -40,10 +40,10 @@ define(["util", "detail", "gloader"], function(util, detail) {
     table.draw(dataTable, options);
 
     $(".id-column.detail-link").click(function() {
-      var dev_id = this.text;
+      var device_id = this.text;
       var device_type = this.getAttribute("device_type");
-      util.pageLoad(util.pages.DETAIL, {device_id: dev_id, device_type: device_type}, function() {
-        detail.render({device_id: dev_id, device_type: device_type});
+      util.pageLoad(util.pages.DETAIL, {device_id: device_id, device_type: device_type}, function() {
+        detail.render({device_id: device_id, device_type: device_type});
       });
       $(".tab-item.active").removeClass("active");
     });
@@ -63,7 +63,11 @@ define(["util", "detail", "gloader"], function(util, detail) {
       console.log(resp);
       $.extend(dev, resp.device_status[0]);
       util.setDevStat(devs);
-      timeout_id = setTimeout(function() {drawTable(devs);}, 1000);;
+      $("#refresh-btn span").addClass("spinner");
+      timeout_id = setTimeout(function() {
+        drawTable(devs);
+        $("#refresh-btn span").removeClass("spinner");
+      }, 500);;
     }
   }
 

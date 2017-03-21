@@ -1,8 +1,6 @@
 
 id + display name "..."
-busy icon
 search bar in device status tab search by id^
-map and offline devs in dashboard 
 map in operations
 
 multiple devices upgrade*
@@ -14,3 +12,5 @@ click on column to select in operations tab
 multiple ids
 no device type for getitsframe/image
 one by one device status request*
+- busy icon
+map and offline devs in dashboard 

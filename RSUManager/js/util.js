@@ -312,7 +312,7 @@ define(["jquery"], function() {
     }, 
 
     isOnline: function(dev) {
-      if (dev.status === "online") return true;
+      if (dev.status === "online" || dev.status === "available") return true;
       return false;
     },
     

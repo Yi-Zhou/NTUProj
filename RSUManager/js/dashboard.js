@@ -1,4 +1,4 @@
-define(["util", "gloader"], function(util) {
+define(["util", "detail", "gloader", "gmap"], function(util, detail) {
   "use strict"
 
   function drawChart(values) {
@@ -46,6 +46,51 @@ define(["util", "gloader"], function(util) {
     table.draw(data, options);
   }
 
+  function makeMarker(dev, map, infowindow) {
+    var latLng = {lat: dev.latitude, lng: dev.longitude}
+    var marker = new google.maps.Marker({position: latLng, map: map, title: dev.device_id});
+
+    marker.addListener('mouseover', function() {
+      infowindow.open(map, this);
+    });
+
+    // assuming you also want to hide the infowindow when user mouses-out
+    marker.addListener('mouseout', function() {
+      infowindow.close();
+    });
+    marker.addListener('click', function() {
+      infowindow.open(map, this);
+    });
+    marker.addListener('dblclick', function() {
+      console.log("I am triggered!");
+      util.pageLoad(util.pages.DETAIL, {device_id: dev.device_id, device_type: dev.device_type}, function() {
+        detail.render({device_id: dev.device_id, device_type: dev.device_type});
+      });
+    });
+  }
+
+  function drawMap(devs) {
+
+    var latLng = {lat: 1.348857, lng: 103.681909};
+    var map = new google.maps.Map(document.getElementById('overview-map'),{
+      center: latLng,
+      zoom: 14
+    });
+
+    var len = devs.length;
+    for (var ii = 0; ii < len; ++ii)
+    {
+      var dev = devs[ii];
+      if (dev.device_type === "RSU")
+      {
+        var infowindow = new google.maps.InfoWindow({
+          content: dev.device_id
+        });
+        makeMarker(dev, map, infowindow);
+      }
+    }
+  }
+
   function drawCharts(devs) {
     google.charts.load('current', {'packages':['corechart', 'table']});
 
@@ -59,7 +104,7 @@ define(["util", "gloader"], function(util) {
     for (var i = 0; i < len; ++i)
     {
       var dev = devs[i];
-      if (dev.status === "online" && dev.device_type === "RSU") 
+      if (util.isOnline(dev) && dev.device_type === "RSU") 
         values.rsu_online_num++;
       else if (dev.device_type === "RSU") 
         values.rsu_offline_num++;
@@ -73,6 +118,7 @@ define(["util", "gloader"], function(util) {
       drawChart(values);
       drawTable(values);
     });
+    drawMap(devs);
   }
 
   function onWindowResize() {
