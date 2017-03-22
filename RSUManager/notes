@@ -2,6 +2,9 @@
 id + display name "..."
 search bar in device status tab search by id^
 map in operations
+offline devs in dashboard 
+pagenate 
+load per device
 
 multiple devices upgrade*
 full names of operation btns
@@ -13,4 +16,8 @@ multiple ids
 no device type for getitsframe/image
 one by one device status request*
 - busy icon
-map and offline devs in dashboard 
+map and
+
+#######
+bug in backend:
+- always return the first obu/rsu when getCurrentStatus

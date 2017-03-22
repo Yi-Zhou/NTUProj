@@ -115,8 +115,11 @@ define(["util", "detail", "gloader", "gmap"], function(util, detail) {
     }
 
     google.charts.setOnLoadCallback(function() {
-      drawChart(values);
-      drawTable(values);
+      if (document.getElementById('piechart') && document.getElementById('overview-table'))
+      {
+        drawChart(values);
+        drawTable(values);
+      }
     });
     drawMap(devs);
   }

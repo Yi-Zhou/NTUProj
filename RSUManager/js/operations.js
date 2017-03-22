@@ -46,16 +46,22 @@ define(["util", "detail", "dev_control", "gloader"], function(util, detail, dev_
       $(".tab-item.active").removeClass("active");
     });
 
-    $(".google-visualization-table-table tr").click(function() {
-      console.log("clicked");
+    var $tr = $(".google-visualization-table-table tr");
+    $tr.click(function(event) {
       $(this).find("input.device-selector").click();
-    })
+    });
+    $tr.find("input.device-selector").click(function() {
+      $(this).click();
+    });
+
   }
 
   function callback(resp) {
     var devs = resp.device_status;
     util.setDevStat(devs);
-    drawTable(devs);
+    google.charts.setOnLoadCallback(function() {
+      drawTable(devs);
+    });
   }
 
   function refresh() {
@@ -65,6 +71,10 @@ define(["util", "detail", "dev_control", "gloader"], function(util, detail, dev_
   function unload(e) {
     $("#refresh-btn").show();
     dev_control.unload();
+  }
+
+  function loadCallback() {
+
   }
 
   return {
@@ -77,7 +87,12 @@ define(["util", "detail", "dev_control", "gloader"], function(util, detail, dev_
       if (!devs)
         util.ajax(util.backendURLs.getCurrentDevStat, callback);
       else 
-        drawTable(devs);
+      {
+        google.charts.setOnLoadCallback(function() {
+          drawTable(devs);
+        });
+
+      }
 
       $("#refresh-btn").hide();
 

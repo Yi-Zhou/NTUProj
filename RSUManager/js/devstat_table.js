@@ -57,17 +57,18 @@ define(["util", "detail", "gloader"], function(util, detail) {
 
   var timeout_id;
   function refresh_callback(dev) {
+    console.log(dev);
     return function(resp) {
       clearTimeout(timeout_id);
       console.log(dev);
-      console.log(resp);
+      console.log(resp.device_status);
       $.extend(dev, resp.device_status[0]);
       util.setDevStat(devs);
       $("#refresh-btn span").addClass("spinner");
       timeout_id = setTimeout(function() {
         drawTable(devs);
         $("#refresh-btn span").removeClass("spinner");
-      }, 500);;
+      }, 50);;
     }
   }
 
